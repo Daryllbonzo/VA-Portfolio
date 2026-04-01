@@ -390,7 +390,7 @@ button, input, textarea, select { font: inherit; }
   font-family: "Space Grotesk", sans-serif;
 }
 
-.badges, .actions, .chips, .preview-tags, .tool-box, .contact-grid {
+.badges, .actions, .chips, .preview-tags, .contact-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -442,7 +442,7 @@ button, input, textarea, select { font: inherit; }
   box-shadow: inset 0 -10px 22px rgba(141, 235, 217, 0.05), 0 14px 40px rgba(0, 0, 0, 0.16);
 }
 .actions, .chips { margin-top: 28px; }
-.chips span, .tool-box span, .preview-tags span {
+.chips span, .preview-tags span {
   padding: 12px 16px;
   border-radius: 999px;
   background: rgba(8, 18, 27, 0.56);
@@ -648,7 +648,96 @@ button, input, textarea, select { font: inherit; }
   font-weight: 800;
 }
 
-.tool-box { gap: 12px; }
+.platform-cloud {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.platform-chip {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, rgba(10, 24, 35, 0.94), rgba(8, 18, 27, 0.88));
+  border: 1px solid rgba(141, 235, 217, 0.12);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  translate: 0 0;
+  animation: platformFloat var(--float-duration, 8s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.platform-chip::before,
+.platform-chip::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.platform-chip::before {
+  inset: auto -3.4rem -3.8rem auto;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(141, 235, 217, 0.16), transparent 70%);
+  opacity: 0.82;
+}
+
+.platform-chip::after {
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.platform-chip:hover {
+  translate: 0 -8px;
+  transform: scale(1.015);
+  border-color: rgba(141, 235, 217, 0.24);
+  box-shadow: 0 28px 66px rgba(0, 0, 0, 0.32), 0 0 32px rgba(141, 235, 217, 0.1);
+}
+
+.platform-chip strong {
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.platform-mark {
+  position: relative;
+  z-index: 1;
+  width: 68px;
+  height: 68px;
+  display: grid;
+  place-items: center;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.platform-logo {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+.platform-chip.is-workspace .platform-mark { background: linear-gradient(135deg, rgba(66, 133, 244, 0.16), rgba(52, 168, 83, 0.1)); }
+.platform-chip.is-excel .platform-mark { background: linear-gradient(135deg, rgba(33, 163, 102, 0.18), rgba(16, 124, 65, 0.12)); }
+.platform-chip.is-calendar .platform-mark { background: linear-gradient(135deg, rgba(66, 133, 244, 0.16), rgba(255, 255, 255, 0.08)); }
+.platform-chip.is-zoom .platform-mark { background: linear-gradient(135deg, rgba(45, 140, 255, 0.2), rgba(84, 165, 255, 0.12)); }
+.platform-chip.is-slack .platform-mark { background: linear-gradient(135deg, rgba(224, 30, 90, 0.14), rgba(54, 197, 240, 0.12)); }
+.platform-chip.is-notion .platform-mark { background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(180, 190, 194, 0.08)); }
+.platform-chip.is-canva .platform-mark { background: linear-gradient(135deg, rgba(91, 108, 255, 0.18), rgba(0, 196, 204, 0.14)); }
+.platform-chip.is-docs .platform-mark { background: linear-gradient(135deg, rgba(66, 133, 244, 0.18), rgba(174, 203, 250, 0.12)); }
+.platform-chip.is-gmail .platform-mark { background: linear-gradient(135deg, rgba(234, 67, 53, 0.16), rgba(66, 133, 244, 0.12)); }
+
 .note {
   margin-top: 20px;
   padding: 22px 24px;
@@ -835,6 +924,11 @@ button, input, textarea, select { font: inherit; }
   50% { box-shadow: 0 0 0 1px rgba(246, 179, 122, 0.18) inset, 0 0 40px rgba(141, 235, 217, 0.34); }
 }
 
+@keyframes platformFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -7px; }
+}
+
 @keyframes chipFloat {
   0%, 100% { transform: translate3d(0, 0, 0); }
   50% { transform: translate3d(0, -4px, 0); }
@@ -855,6 +949,7 @@ button, input, textarea, select { font: inherit; }
   .hero { min-height: auto; padding-top: 18px; }
   .preview { position: static; }
   .proof-grid { grid-template-columns: 1fr; }
+  .platform-cloud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .dock { right: auto; left: 20px; top: auto; bottom: 20px; transform: none; flex-direction: row; }
   .dock a { width: 76px; }
 }
@@ -867,7 +962,7 @@ button, input, textarea, select { font: inherit; }
   .header .wrap, .footer .wrap { flex-wrap: wrap; }
   .nav { order: 3; width: 100%; justify-content: space-between; }
   .copy h1 { max-width: 100%; }
-  .stats, .service-grid, .strength-grid { grid-template-columns: 1fr; }
+  .stats, .service-grid, .strength-grid, .platform-cloud { grid-template-columns: 1fr; }
   .dock { left: 14px; right: 14px; bottom: 14px; justify-content: center; }
   .dock a { flex: 1; width: auto; min-height: 64px; }
 }
