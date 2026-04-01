@@ -361,7 +361,7 @@ button, input, textarea, select { font: inherit; }
 
 .timezone-bubble {
   position: fixed;
-  left: 18px;
+  left: 8px;
   top: auto;
   bottom: 132px;
   z-index: 27;
@@ -373,7 +373,7 @@ button, input, textarea, select { font: inherit; }
   max-width: calc(100vw - 36px);
   pointer-events: none;
   transform: none;
-  animation: timezoneDriftMobile 8.2s ease-in-out infinite;
+  animation: timezoneDriftMobile 5.9s ease-in-out infinite;
 }
 
 .timezone-avatar {
@@ -1068,7 +1068,7 @@ button, input, textarea, select { font: inherit; }
 
 @keyframes timezoneDrift {
   0%, 100% { transform: translateY(-50%) translate3d(0, 0, 0); }
-  50% { transform: translateY(-50%) translate3d(0, -8px, 0); }
+  50% { transform: translateY(-50%) translate3d(0, -10px, 0); }
 }
 
 @keyframes timezonePulse {
@@ -1102,7 +1102,7 @@ button, input, textarea, select { font: inherit; }
   .preview { position: static; }
   .proof-grid { grid-template-columns: 1fr; }
   .platform-cloud { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .timezone-bubble { left: 20px; top: auto; bottom: 118px; transform: none; animation-name: timezoneDriftMobile; }
+  .timezone-bubble { left: 10px; top: auto; bottom: 118px; transform: none; animation-name: timezoneDriftMobile; }
   .timezone-card::before { display: none; }
   .dock { right: auto; left: 20px; top: auto; bottom: 20px; transform: none; flex-direction: row; }
   .dock a { width: 76px; }
@@ -1117,7 +1117,7 @@ button, input, textarea, select { font: inherit; }
   .nav { order: 3; width: 100%; justify-content: space-between; }
   .copy h1 { max-width: 100%; }
   .stats, .service-grid, .strength-grid, .platform-cloud { grid-template-columns: 1fr; }
-  .timezone-bubble { left: 14px; right: 14px; bottom: 92px; width: auto; }
+  .timezone-bubble { left: 10px; right: 14px; bottom: 92px; width: auto; }
   .timezone-avatar { width: 52px; height: 52px; }
   .dock { left: 14px; right: 14px; bottom: 14px; justify-content: center; }
   .dock a { flex: 1; width: auto; min-height: 64px; }
@@ -1130,7 +1130,7 @@ button, input, textarea, select { font: inherit; }
   .nav { gap: 12px; flex-wrap: wrap; }
   .copy h1 { font-size: clamp(2.7rem, 15vw, 4rem); }
   .heading h2, .panel h2 { font-size: clamp(2rem, 11vw, 3rem); }
-  .timezone-bubble { grid-template-columns: 1fr; gap: 10px; bottom: 100px; }
+  .timezone-bubble { grid-template-columns: 1fr; gap: 10px; left: 10px; right: 10px; bottom: 100px; }
   .timezone-avatar { width: 48px; height: 48px; }
 }
 
@@ -1146,12 +1146,12 @@ button, input, textarea, select { font: inherit; }
 
 @keyframes timezoneDriftMobile {
   0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -6px, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
 }
 
 @media (min-width: 1700px) {
   .timezone-bubble {
-    left: calc((100vw - 1200px) / 2 - 232px);
+    left: calc((100vw - 1200px) / 2 - 252px);
     top: 58%;
     bottom: auto;
     transform: translateY(-50%);
