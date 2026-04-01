@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   const [progress, setProgress] = useState(0);
+  const [dark, setDark] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,35 +16,34 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const services = [
-    "Email & Calendar Management",
-    "Data Entry & File Organization",
-    "Online Research & Lead Generation",
-    "Reports & Admin Support",
-  ];
-
-  const samples = [
-    {
-      title: "Data Entry Project",
-      img: "https://dummyimage.com/800x400/22c55e/ffffff&text=Excel+Tracking",
-    },
-    {
-      title: "Research Report",
-      img: "https://dummyimage.com/800x400/2563eb/ffffff&text=Research+Report",
-    },
-    {
-      title: "Email Organization",
-      img: "https://dummyimage.com/800x400/1e293b/ffffff&text=Inbox+Management",
-    },
-  ];
-
   return (
     <>
       <style>{`
         body {
           margin: 0;
           font-family: 'Segoe UI', sans-serif;
-          background: linear-gradient(135deg, #eef4ff, #f8fbff);
+          background: ${dark ? '#0f172a' : '#f8fafc'};
+          color: ${dark ? 'white' : '#111'};
+          transition: 0.3s;
+        }
+
+        .toggle {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: #22c55e;
+          padding: 10px 14px;
+          border-radius: 10px;
+          cursor: pointer;
+          z-index: 10;
+        }
+
+        .chart-bg {
+          position: fixed;
+          width: 100%;
+          height: 100%;
+          opacity: 0.08;
+          z-index: -1;
         }
 
         .container {
@@ -55,10 +55,6 @@ export default function App() {
         .hero {
           text-align: center;
           padding: 80px 20px;
-          background: linear-gradient(135deg, #0f172a, #2563eb);
-          color: white;
-          border-radius: 20px;
-          animation: fadeUp 0.8s ease;
         }
 
         .btn {
@@ -69,47 +65,22 @@ export default function App() {
           border: none;
           border-radius: 12px;
           cursor: pointer;
-          font-weight: bold;
+          animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+          from { box-shadow: 0 0 10px #22c55e; }
+          to { box-shadow: 0 0 25px #22c55e; }
         }
 
         .section {
-          margin-top: 50px;
-          padding: 30px;
-          background: white;
-          border-radius: 20px;
-          animation: fadeUp 0.8s ease;
-        }
-
-        .chart {
-          height: 220px;
-          background: #e5e7eb;
-          border-radius: 10px;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .bar {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          background: linear-gradient(to top, #22c55e, #16a34a);
-          transition: height 0.3s ease;
-        }
-
-        .services {
-          display: grid;
-          gap: 15px;
+          margin-top: 60px;
         }
 
         .card {
+          background: rgba(255,255,255,0.05);
           padding: 20px;
-          background: #f9fafb;
           border-radius: 12px;
-          transition: 0.3s;
-        }
-
-        .card:hover {
-          transform: translateY(-5px);
         }
 
         .samples {
@@ -121,73 +92,72 @@ export default function App() {
           .samples { grid-template-columns: repeat(3,1fr); }
         }
 
-        .sample-card img {
+        .card img {
           width: 100%;
           border-radius: 10px;
-          margin-top: 10px;
         }
 
-        .cta {
-          text-align: center;
-          margin-top: 50px;
-          padding: 40px;
-          background: linear-gradient(135deg, #1e293b, #0f766e);
-          color: white;
+        .chat-bubble {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background: #22c55e;
+          padding: 15px 20px;
           border-radius: 20px;
+          animation: fadeIn 1s ease;
         }
 
-        @keyframes fadeUp {
+        @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px);} 
           to { opacity: 1; transform: translateY(0);} 
         }
       `}</style>
 
-      <div className="container">
+      <div className="toggle" onClick={() => setDark(!dark)}>
+        {dark ? 'Light Mode' : 'Dark Mode'}
+      </div>
 
+      <svg className="chart-bg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <polyline fill="none" stroke="#22c55e" strokeWidth="0.5" points={`0,80 20,60 40,70 60,40 80,30 100,10`} />
+      </svg>
+
+      <div className="container">
         <div className="hero">
-          <h1>Helping Business Owners Stay Organized & Grow Faster</h1>
-          <p>General Virtual Assistant | Efficient • Reliable • Detail-Oriented</p>
+          <h1>Daryll John L. Bonzo</h1>
+          <p>General Virtual Assistant</p>
           <a href="https://wa.me/639241232790">
             <button className="btn">Hire Me on WhatsApp</button>
           </a>
         </div>
 
         <div className="section">
-          <h2>Business Growth Tracker</h2>
-          <div className="chart">
-            <div className="bar" style={{ height: `${progress}%` }}></div>
-          </div>
-        </div>
-
-        <div className="section">
-          <h2>What I Can Do For You</h2>
-          <div className="services">
-            {services.map((s) => (
-              <div className="card" key={s}>{s}</div>
-            ))}
-          </div>
-        </div>
-
-        <div className="section">
           <h2>Sample Work</h2>
           <div className="samples">
-            {samples.map((s) => (
-              <div className="card sample-card" key={s.title}>
-                <h3>{s.title}</h3>
-                <img src={s.img} />
-              </div>
-            ))}
+            <div className="card">
+              <h3>Client Growth</h3>
+              <img src="https://dummyimage.com/800x400/22c55e/ffffff&text=+120%+Growth" />
+            </div>
+            <div className="card">
+              <h3>Revenue Boost</h3>
+              <img src="https://dummyimage.com/800x400/2563eb/ffffff&text=Revenue+Increase" />
+            </div>
+            <div className="card">
+              <h3>Lead Growth</h3>
+              <img src="https://dummyimage.com/800x400/0f172a/ffffff&text=Lead+Boost" />
+            </div>
           </div>
         </div>
 
-        <div className="cta">
-          <h2>Ready to make your work easier?</h2>
-          <p>Let's connect and start working together today.</p>
-          <a href="https://wa.me/639241232790">
-            <button className="btn">Message Me Now</button>
-          </a>
+        <div className="section">
+          <h2>Contact</h2>
+          <p>📍 Manila, Philippines</p>
+          <p><a href="https://www.facebook.com/daryll.l.bonzo" target="_blank">Facebook</a></p>
+          <p><a href="https://ph.linkedin.com/in/daryll-bonzo-02a0632b0" target="_blank">LinkedIn</a></p>
         </div>
+      </div>
 
+      <div className="chat-bubble">
+        Hi! I'm Daryll 👋 Need a VA?
       </div>
     </>
   );
