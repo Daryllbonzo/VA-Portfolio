@@ -70,6 +70,14 @@ export default function App() {
     "Document formatting and report creation",
     "Admin support for busy founders and teams",
   ];
+  const descriptions = [
+  "I organize emails, filter important messages, and ensure timely responses so your inbox stays under control.",
+  "I manage schedules, set appointments, and handle follow-ups to keep your calendar efficient and stress-free.",
+  "I input, clean, and structure data accurately so your spreadsheets remain organized and easy to understand.",
+  "I gather relevant information, analyze sources, and deliver clear summaries to support your decisions.",
+  "I format documents professionally, making reports clean, readable, and ready for presentation or sharing.",
+  "I handle daily admin tasks with consistency and attention to detail, helping your business run smoothly."
+];
 
   const tools = [
     "Google Sheets",
@@ -686,7 +694,12 @@ export default function App() {
               My goal is to take repetitive, time-consuming work off your plate so you can focus on sales, strategy, client relationships, and business growth.
             </p>
             <div className="grid-3">
-              {offers.map((item, index) => {
+              {offers.map((item, index) => (
+  <div className="card offer-card" key={item}>
+    <h3>{item}</h3>
+    <p>{descriptions[index]}</p>
+  </div>
+))}
   const descriptions = [
     "I organize emails, filter important messages, and ensure timely responses so your inbox stays under control.",
     "I manage schedules, set appointments, and handle follow-ups to keep your calendar efficient and stress-free.",
